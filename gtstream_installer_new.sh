@@ -259,7 +259,7 @@ cat > /opt/hbase/$HBASE_VERSION/conf/hbase-site.xml << EOF
         <value>$ZK_QUORUM</value>
     </property>
     <property>
-        <name>hbase.zookeper.property.dataDir</name>
+        <name>hbase.zookeeper.property.dataDir</name>
         <value>$ZOOKEEPER_BASE</value>
     </property>
 </configuration>
