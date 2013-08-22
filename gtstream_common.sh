@@ -57,3 +57,13 @@ FLUME_HBASE_COLUMNFAMILY=log
 # should be a single logfile that is appended to on each machine
 # that's part of the test
 GTSTREAM_LOGFILE=/mnt/gtstream/logs/logfile.log
+
+
+# set this to "true" to reset passwords on an instance during install
+# do NOT do this on a public cloud! (e.g. AWS)
+GTSTREAM_ENABLE_PASSWORDS=true
+# set the password for the root user
+GTSTREAM_ROOT_PASSWORD="P@ssw0rd!"
+# set the password for the ubuntu user
+GTSTREAM_UBUNTU_PASSWORD="L0gM3In"
+

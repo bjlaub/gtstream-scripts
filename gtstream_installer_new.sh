@@ -14,6 +14,32 @@ fi
 mkdir -p ~/files
 
 
+## setup a useful vimrc for root and ubuntu
+for vimrc in /root/.vimrc /home/ubuntu/.vimrc; do
+    cat > $vimrc << EOF
+set shiftwidth=4
+set softtabstop=4
+set et
+set autoindent
+EOF
+done
+chown ubuntu:ubuntu /home/ubuntu/.vimrc
+
+
+## Setup passwords if requested
+if [[ $GTSTREAM_ENABLE_PASSWORDS == "true" ]]; then
+    echo "### Resetting passwords for root and ubuntu"
+    # enable password logon for ssh
+    sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+    restart ssh
+
+    cat << EOF | chpasswd
+root:$GTSTREAM_ROOT_PASSWORD
+ubuntu:$GTSTREAM_UBUNTU_PASSWORD
+EOF
+
+fi
+
 ## Setup static hosts
 echo "### Setting up /etc/hosts"
 if [ ! -z $HADOOP_MASTER_HOSTNAME ]; then
