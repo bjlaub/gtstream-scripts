@@ -282,7 +282,36 @@ tar -C /opt/flume -xzf ~/files/$FLUME_TARBALL
 chmod -R go+rwX /opt/flume
 
 # configure flume
-# TODO
+cat > /opt/flume/$FLUME_VERSION/conf/flume-conf.properties << EOF
+# configure this flume agent to watch a logfile and put it into hbase
+# this is a pretty simplistic example, and attempts to emulate the old
+# "tail -f" behaviour from FlumeOG, which is somewhat unreliable
+agent.sources = tailSingleFileSourc
+agent.channels = memoryChannel
+agent.sinks = hbaseSink
+
+# configure source
+agent.sources.tailSingleFileSource.type = exec
+agent.sources.tailSingleFileSource.channel = memoryChannel
+agent.sources.tailSingleFileSource.command = tail -F $GTSTREAM_LOGFILE
+
+# configure channel
+agent.channels.memoryChannel.type = memory
+agent.channels.memoryChannel.capacity = 100
+
+# configure sink
+agent.sinks.hbaseSink.type = org.apache.flume.sink.hbase.AsyncHBaseSink
+agent.sinks.hbaseSink.channel = memoryChannel
+agent.sinks.hbaseSink.table = $FLUME_HBASE_TABLE
+agent.sinks.hbaseSink.columnFamily = $FLUME_HBASE_COLUMNFAMILY
+EOF
+
+cat > /opt/flume/$FLUME_VERSION/conf/flume-env.sh << EOF
+JAVA_HOME=${JAVA_HOME}
+# add hbase-site config to flume's classpath
+FLUME_CLASSPATH=${HBASE_HOME}/conf/hbase-site.xml
+EOF
+
 
 cat >> /etc/bash.bashrc << EOF
 export PATH=\$PATH:$FLUME_HOME/bin

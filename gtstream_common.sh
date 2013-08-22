@@ -49,4 +49,11 @@ FLUME_TARBALL=${FLUME_VERSION}.tar.gz
 FLUME_URL=http://www.gtlib.gatech.edu/pub/apache/flume/$FLUME_VERSION_SHORT/$FLUME_TARBALL
 FLUME_HOME=/opt/flume/$FLUME_VERSION
 FLUME_BASE=/mnt/flume
+FLUME_HBASE_TABLE=test
+FLUME_HBASE_COLUMNFAMILY=log
 
+
+# this is the path to a "workload" file for the gtstream benchmark
+# should be a single logfile that is appended to on each machine
+# that's part of the test
+GTSTREAM_LOGFILE=/mnt/gtstream/logs/logfile.log
