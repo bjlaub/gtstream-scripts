@@ -252,7 +252,7 @@ cat > /opt/hbase/$HBASE_VERSION/conf/hbase-site.xml << EOF
     </property>
     <property>
         <name>hbase.zookeeper.property.clientPort</name>
-        <value>2222</value>
+        <value>2181</value>
     </property>
     <property>
         <name>hbase.zookeeper.quorum</name>
@@ -286,18 +286,18 @@ cat > /opt/flume/$FLUME_VERSION/conf/flume-conf.properties << EOF
 # configure this flume agent to watch a logfile and put it into hbase
 # this is a pretty simplistic example, and attempts to emulate the old
 # "tail -f" behaviour from FlumeOG, which is somewhat unreliable
-agent.sources = tailSingleFileSourc
+agent.sources = tailSingleFileSource
 agent.channels = memoryChannel
 agent.sinks = hbaseSink
 
 # configure source
 agent.sources.tailSingleFileSource.type = exec
-agent.sources.tailSingleFileSource.channel = memoryChannel
+agent.sources.tailSingleFileSource.channels = memoryChannel
 agent.sources.tailSingleFileSource.command = tail -F $GTSTREAM_LOGFILE
 
 # configure channel
 agent.channels.memoryChannel.type = memory
-agent.channels.memoryChannel.capacity = 100
+agent.channels.memoryChannel.capacity = 10000
 
 # configure sink
 agent.sinks.hbaseSink.type = org.apache.flume.sink.hbase.AsyncHBaseSink
@@ -311,7 +311,6 @@ JAVA_HOME=${JAVA_HOME}
 # add hbase-site config to flume's classpath
 FLUME_CLASSPATH=${HBASE_HOME}/conf/hbase-site.xml
 EOF
-
 
 cat >> /etc/bash.bashrc << EOF
 export PATH=\$PATH:$FLUME_HOME/bin
