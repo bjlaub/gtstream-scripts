@@ -269,3 +269,22 @@ cat >> /etc/bash.bashrc << EOF
 export PATH=\$PATH:$HBASE_HOME/bin
 EOF
 
+
+## Install Flume
+echo "### Installing Flume"
+if [ ! -f ~/files/$FLUME_TARBALL ]; then
+    wget $FLUME_URL
+    mv $FLUME_TARBALL ~/files
+fi
+
+mkdir -p /opt/flume
+tar -C /opt/flume -xzf ~/files/$FLUME_TARBALL
+chmod -R go+rwX /opt/flume
+
+# configure flume
+# TODO
+
+cat >> /etc/bash.bashrc << EOF
+export PATH=\$PATH:$FLUME_HOME/bin
+EOF
+

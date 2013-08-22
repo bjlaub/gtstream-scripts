@@ -3,7 +3,7 @@
 # this is the # of lines to remove from the end of /etc/bash.bashrc
 # annoyingly, must match the number of echos *into* /etc/bash.bashrc in the installer script
 # probably would be safe to just continuously append to bashrc, but whatever...
-LAST_BASHRC_LINES=6
+LAST_BASHRC_LINES=7
 
 # similar thing for /etc/hosts
 LAST_HOSTS_LINES=2

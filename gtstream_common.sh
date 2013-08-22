@@ -41,3 +41,12 @@ HBASE_MASTER=10.0.16.161
 # regionservers need to be able to locate the master via the hostname published to zookeeper,
 # which turns out not to be an IP address... womp :(
 HBASE_MASTER_HOSTNAME=gtstream-ng-hbase-master
+
+
+FLUME_VERSION_SHORT=1.4.0
+FLUME_VERSION=apache-flume-${FLUME_VERSION_SHORT}-bin
+FLUME_TARBALL=${FLUME_VERSION}.tar.gz
+FLUME_URL=http://www.gtlib.gatech.edu/pub/apache/flume/$FLUME_VERSION_SHORT/$FLUME_TARBALL
+FLUME_HOME=/opt/flume/$FLUME_VERSION
+FLUME_BASE=/mnt/flume
+
