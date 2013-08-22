@@ -63,7 +63,7 @@ GTSTREAM_LOGFILE=/mnt/gtstream/logs/logfile.log
 # do NOT do this on a public cloud! (e.g. AWS)
 GTSTREAM_ENABLE_PASSWORDS=true
 # set the password for the root user
-GTSTREAM_ROOT_PASSWORD="P@ssw0rd!"
+GTSTREAM_ROOT_PASSWORD="P@ssw0rd1!"
 # set the password for the ubuntu user
 GTSTREAM_UBUNTU_PASSWORD="L0gM3In"
 

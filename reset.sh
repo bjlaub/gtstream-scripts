@@ -36,6 +36,13 @@ head -n -${LAST_SYSCTL_LINES} /etc/sysctl.conf >.sysctlnew
 mv -f .sysctlnew /etc/sysctl.conf
 sysctl -p
 
+# reset password authentication state for ssh
+# note that we can't actually reset passwords once they've been set by the installer!
+if [[ $GTSTREAM_ENABLE_PASSWORDS == "true" ]]; then
+    sed -i -e 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+    restart ssh
+fi
+
 # remove software
 rm -rf /opt/*
 
