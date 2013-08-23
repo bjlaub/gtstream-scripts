@@ -43,10 +43,10 @@ fi
 ## Setup static hosts
 echo "### Setting up /etc/hosts"
 if [ ! -z $HADOOP_MASTER_HOSTNAME ]; then
-    echo "$HADOOP_MASTER $HADOOP_MASTER_HOSTNAME ${HADOOP_MASTER_HOSTNAME}.novalocal" >> /etc/hosts
+    echo "$HADOOP_MASTER $HADOOP_MASTER_HOSTNAME ${HADOOP_MASTER_HOSTNAME}${CLOUD_FQDN_SUFFIX}" >> /etc/hosts
 fi
 if [ ! -z $HBASE_MASTER_HOSTNAME ]; then
-    echo "$HBASE_MASTER $HBASE_MASTER_HOSTNAME ${HBASE_MASTER_HOSTNAME}.novalocal" >> /etc/hosts
+    echo "$HBASE_MASTER $HBASE_MASTER_HOSTNAME ${HBASE_MASTER_HOSTNAME}${CLOUD_FQDN_SUFFIX}" >> /etc/hosts
 fi
 
 
