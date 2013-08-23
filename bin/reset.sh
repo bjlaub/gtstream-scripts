@@ -16,6 +16,20 @@ if [[ `whoami` != "root" ]]; then
     exit 1
 fi
 
+echo -n "reset gtstream software - are you sure? [y/n]: "
+read choice
+while [[ $choice != "y" && $choice != "n" ]]; do
+    echo -n "reset gtstream software - are you sure? [y/n]: "
+    read choice
+done
+
+if [[ $choice == "n" ]]; then
+    echo "aborted."
+    exit 1
+fi
+
+exit 123
+
 set -x
 # delete all software and prepare to re-run gtstream_installer.sh
 

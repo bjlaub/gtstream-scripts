@@ -21,9 +21,9 @@ HADOOP_TARBALL=${HADOOP_VERSION}.tar.gz
 HADOOP_URL=http://www.gtlib.gatech.edu/pub/apache/hadoop/common/$HADOOP_VERSION/$HADOOP_TARBALL
 HADOOP_HOME=/opt/hadoop/$HADOOP_VERSION
 HADOOP_BASE=/mnt/hadoop
-# IP address for the master hadoop server
-HADOOP_MASTER=10.0.16.103
-HADOOP_MASTER_HOSTNAME=gtstream-ng-hadoop-master
+# IP address/hostname for the master hadoop server
+#HADOOP_MASTER=
+#HADOOP_MASTER_HOSTNAME=
 
 
 ZOOKEEPER_VERSION=zookeeper-3.4.5
@@ -34,8 +34,8 @@ ZOOKEEPER_BASE=/mnt/zookeeper
 # zookeeper quorum nodes
 # ZOOKEEPER_QUORUM_1 is required
 # for additional nodes (currently up to 3), set ZOOKEEPER_QUORUM_2 and ZOOKEEPER_QUORUM_3
-ZOOKEEPER_QUORUM_1=10.0.16.152
-ZOOKEEPER_QUORUM_1_HOSTNAME=gtstream-ng-zk1
+#ZOOKEEPER_QUORUM_1=
+#ZOOKEEPER_QUORUM_1_HOSTNAME=
 #ZOOKEEPER_QUORUM_2=
 #ZOOKEEPER_QUORUM_2_HOSTNAME=
 #ZOOKEEPER_QUORUM_3=
@@ -47,9 +47,9 @@ HBASE_TARBALL=${HBASE_VERSION}.tar.gz
 HBASE_URL=http://www.gtlib.gatech.edu/pub/apache/hbase/$HBASE_VERSION/$HBASE_TARBALL
 HBASE_HOME=/opt/hbase/$HBASE_VERSION
 HBASE_HDFS_BASE=/hbase
-# IP address for the master hbase server
-HBASE_MASTER=10.0.16.161
-HBASE_MASTER_HOSTNAME=gtstream-ng-hbase-master
+# IP address/hostname for the master hbase server
+#HBASE_MASTER=
+#HBASE_MASTER_HOSTNAME=
 
 
 FLUME_VERSION_SHORT=1.4.0
@@ -75,4 +75,6 @@ GTSTREAM_ENABLE_PASSWORDS=true
 GTSTREAM_ROOT_PASSWORD="P@ssw0rd1!"
 # set the password for the ubuntu user
 GTSTREAM_UBUNTU_PASSWORD="L0gM3In"
+
+
 

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-. gtstream_common.sh
+basedir=`dirname $0/..`
+. $basedir/conf/gtstream-env.sh
 
 # add ourselves to a running hbase cluster
 # you should only run this ONCE per regionserver, because it will add *this* 

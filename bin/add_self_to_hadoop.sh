@@ -1,6 +1,7 @@
 #!/bin/bash
 
-. gtstream_common.sh
+basedir=`dirname $0/..`
+. $basedir/conf/gtstream-env.sh
 
 # add ourselves to a running hadoop cluster
 # you should only run this ONCE per slave node, because it will add *this* 
