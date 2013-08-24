@@ -10,7 +10,7 @@
 # cluster. It adds the assigned IP addresses to conf/gtstream-env.sh
 
 
-basedir=`dirname $0/..`
+basedir=`dirname $0`/..
 . $basedir/bin/common.sh
 . $basedir/conf/cloud-properties.sh
 

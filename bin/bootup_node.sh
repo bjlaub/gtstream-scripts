@@ -1,6 +1,6 @@
 #!/bin/bash
 
-basedir=`dirname $0/..`
+basedir=`dirname $0`/..
 . $basedir/bin/common.sh
 
 if [ $# -lt 2 ]; then

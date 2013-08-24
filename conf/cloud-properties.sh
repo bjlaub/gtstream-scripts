@@ -25,15 +25,15 @@ SECURITY_GROUPS=insecure
 # hostname for hadoop master
 HADOOP_MASTER_HOSTNAME=gtstream-ng-hadoop-master
 # OpenStack VM flavor for hadoop master
-HADOOP_MASTER_FLAVOR=
+HADOOP_MASTER_FLAVOR=10  # ne.large
 
 # hostname for hbase master
 HBASE_MASTER_HOSTNAME=gtstream-ng-hbase-master
 # OpenStack VM flavor for hbase master
-HBASE_MASTER_FLAVOR=
+HBASE_MASTER_FLAVOR=4  # m1.large
 
 # OpenStack VM flavor for all zookeeper quorum nodes
-ZOOKEEPER_QUORUM_FLAVOR=
+ZOOKEEPER_QUORUM_FLAVOR=3  # m1.medium
 # hostnames for ZK quorum servers
 # ZOOKEEPER_QUORUM_1_HOSTNAME is required, others are optional
 ZOOKEEPER_QUORUM_1_HOSTNAME=gtstream-ng-zk1

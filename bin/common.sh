@@ -1,6 +1,6 @@
 #!/bin/bash
 
-basedir=`dirname $0/..`
+basedir=`dirname $0`/..
 . $basedir/conf/cloud-properties.sh
 
 function get_ip() {
@@ -11,12 +11,18 @@ function get_ip() {
 function bootup() {
     flavor=$1
     host=$2
+    echo "`date` -- booting VM '$host' with flavor $flavor"
+    set -x
     nova boot --image $IMAGE --key_name $KEY_NAME --security_groups $SECURITY_GROUPS --flavor $flavor $host
+    set +x
 }
 
 function bootup_wait() {
     flavor=$1
     host=$2
+    echo "`date` -- booting VM '$host' with flavor $flavor"
+    set -x
     nova boot --image $IMAGE --key_name $KEY_NAME --security_groups $SECURITY_GROUPS --flavor $flavor --poll $host
+    set +x
 }
 

@@ -78,3 +78,10 @@ GTSTREAM_UBUNTU_PASSWORD="L0gM3In"
 
 
 
+## added by jedi000 // ./bootup_required_nodes.sh @ Fri Aug 23 10:59:33 EDT 2013
+HADOOP_MASTER=10.0.16.100
+HADOOP_MASTER_HOSTNAME=gtstream-ng-hadoop-master
+HBASE_MASTER=10.0.16.102
+HBASE_MASTER_HOSTNAME=gtstream-ng-hbase-master
+ZOOKEEPER_QUORUM_1=10.0.16.103
+ZOOKEEPER_QUORUM_1_HOSTNAME=gtstream-ng-zk1

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-basedir=`dirname $0/..`
+basedir=`dirname $0`/..
+. $basedir/conf/cloud-properties.sh
 . $basedir/bin/common.sh
 
 if [ $# -lt 1 ]; then
@@ -9,4 +10,5 @@ if [ $# -lt 1 ]; then
 fi
 
 set -x
-exec scp -i $KEY -r $basedir $USER@`get_ip $1`:~
+syncdir=`readlink -f $basedir`
+exec scp -i $KEY -r $syncdir $USER@`get_ip $1`:~

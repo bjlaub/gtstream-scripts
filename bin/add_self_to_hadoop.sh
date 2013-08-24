@@ -1,6 +1,6 @@
 #!/bin/bash
 
-basedir=`dirname $0/..`
+basedir=`dirname $0`/..
 . $basedir/conf/gtstream-env.sh
 
 # add ourselves to a running hadoop cluster

@@ -8,8 +8,8 @@ fi
 
 
 ## source config variables
-basedir=`dirname $0/..`
-. $basedir/gtstream-env.sh
+basedir=`dirname $0`/..
+. $basedir/conf/gtstream-env.sh
 
 
 mkdir -p ~/files
