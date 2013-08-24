@@ -70,18 +70,11 @@ GTSTREAM_LOGFILE=/mnt/gtstream/logs/logfile.log
 
 # set this to "true" to reset passwords on an instance during install
 # do NOT do this on a public cloud! (e.g. AWS)
-GTSTREAM_ENABLE_PASSWORDS=true
+GTSTREAM_ENABLE_PASSWORDS=false
 # set the password for the root user
-GTSTREAM_ROOT_PASSWORD="P@ssw0rd1!"
+#GTSTREAM_ROOT_PASSWORD=
 # set the password for the ubuntu user
-GTSTREAM_UBUNTU_PASSWORD="L0gM3In"
+#GTSTREAM_UBUNTU_PASSWORD=
 
 
 
-## added by jedi000 // ./bootup_required_nodes.sh @ Fri Aug 23 10:59:33 EDT 2013
-HADOOP_MASTER=10.0.16.100
-HADOOP_MASTER_HOSTNAME=gtstream-ng-hadoop-master
-HBASE_MASTER=10.0.16.102
-HBASE_MASTER_HOSTNAME=gtstream-ng-hbase-master
-ZOOKEEPER_QUORUM_1=10.0.16.103
-ZOOKEEPER_QUORUM_1_HOSTNAME=gtstream-ng-zk1

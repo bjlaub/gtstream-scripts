@@ -3,9 +3,9 @@
 # set properties used when managing cloud instances, such as ssh keys, security groups, VM hostnames, etc.
 
 # set the ssh key name to use
-KEY_NAME=blaub
+#KEY_NAME=
 # path to private key stored locally
-KEY=~/openstack_cloud/ssh/blaub.pem
+#KEY=
 
 # login user for instances
 USER=ubuntu
@@ -14,7 +14,7 @@ USER=ubuntu
 IMAGE=ubuntu-12.10-server
 
 # security group to use
-SECURITY_GROUPS=insecure
+#SECURITY_GROUPS=
 
 # set the hostnames for some required servers
 # these must be set here in order to use bin/bootup_required_nodes.sh
