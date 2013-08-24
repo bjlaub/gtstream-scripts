@@ -11,4 +11,4 @@ my_ip=`/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'
 echo $my_ip | ssh $HBASE_MASTER "cat >> /opt/hbase/$HBASE_VERSION/conf/regionservers"
 
 # start hbase daemon on this node
-hbase-daemon.sh start regionserver
+$HBASE_HOME/bin/hbase-daemon.sh start regionserver

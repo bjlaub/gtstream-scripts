@@ -1,3 +1,4 @@
 #!/bin/bash
 
-nova list --name gtstream-ng
+. `dirname $0`/../conf/cloud-properties.sh
+nova list --name $VM_HOSTNAME_PREFIX

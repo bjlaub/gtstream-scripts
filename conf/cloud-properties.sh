@@ -16,6 +16,9 @@ IMAGE=ubuntu-12.10-server
 # security group to use
 #SECURITY_GROUPS=
 
+# used by list_servers.sh and list_servers_short.sh
+VM_HOSTNAME_PREFIX=gtstream-ng
+
 # set the hostnames for some required servers
 # these must be set here in order to use bin/bootup_required_nodes.sh
 # that script will also append them to conf/gtstream-env.sh
