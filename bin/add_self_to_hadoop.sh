@@ -11,5 +11,5 @@ my_ip=`/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'
 echo $my_ip | ssh $HADOOP_MASTER "cat >> /opt/hadoop/$HADOOP_VERSION/conf/slaves"
 
 # start hadoop daemons on this node
-hadoop-daemon.sh start datanode
-hadoop-daemon.sh start tasktracker
+$HADOOP_HOME/bin/hadoop-daemon.sh start datanode
+$HADOOP_HOME/bin/hadoop-daemon.sh start tasktracker

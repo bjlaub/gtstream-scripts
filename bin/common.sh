@@ -26,3 +26,10 @@ function bootup_wait() {
     set +x
 }
 
+function reset_ssh() {
+    ip=$1
+    set -x
+    ssh-keygen -f ~/.ssh/known_hosts -R $ip
+    set +x
+}
+
