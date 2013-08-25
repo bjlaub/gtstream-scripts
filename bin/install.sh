@@ -343,3 +343,14 @@ cat >> /etc/bash.bashrc << EOF
 export PATH=\$PATH:$FLUME_HOME/bin
 EOF
 
+
+echo "### Prepare GTStream directories"
+mkdir -p $GTSTREAM_BASE
+mkdir -p $GTSTREAM_LOGS
+chmod -R go+rwX $GTSTREAM_BASE
+chmod -R go+rwX $GTSTREAM_LOGS
+
+
+echo 
+echo "$0 completed on `hostname` @ `date`"
+
