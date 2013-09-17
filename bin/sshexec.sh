@@ -1,6 +1,6 @@
 #!/bin/bash
 
-basedir=`dirname $`/..
+basedir=`dirname $0`/..
 . $basedir/conf/cloud-properties.sh
 . $basedir/bin/common.sh
 
