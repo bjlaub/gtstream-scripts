@@ -86,10 +86,14 @@ sysctl -p
 
 
 ## Install some stuff from apt
-echo "### Updating/Installing apt packages"
-apt-get update
-if [ ! -z "$GTSTREAM_APT_PACKAGES" ]; then
-    apt-get install -y $GTSTREAM_APT_PACKAGES
+if [ $GTSTREAM_INSTALL_SKIP_APT -eq 1 ]; then
+    echo "### Skipping update/install apt packages"
+else
+    echo "### Updating/Installing apt packages"
+    apt-get update
+    if [ ! -z "$GTSTREAM_APT_PACKAGES" ]; then
+        apt-get install -y $GTSTREAM_APT_PACKAGES
+    fi
 fi
 
 
@@ -338,26 +342,30 @@ EOF
 
 
 ## Install OpenTSDB
-echo "### Installing OpenTSDB"
-if [ ! -f ~/files/$OPENTSDB_TARBALL ]; then
-    wget $OPENTSDB_URL
-    mv $OPENTSDB_TARBALL ~/files
-fi
+if [ $GTSTREAM_INSTALL_SKIP_OPENTSDB -eq 1 ]; then
+    echo "### Skipping install of OpenTSDB"
+else
+    echo "### Installing OpenTSDB"
+    if [ ! -f ~/files/$OPENTSDB_TARBALL ]; then
+        wget $OPENTSDB_URL
+        mv $OPENTSDB_TARBALL ~/files
+    fi
 
-mkdir -p /opt/opentsdb
-tar -C /opt/opentsdb -xzf ~/files/$OPENTSDB_TARBALL
-chmod -R go+rwX /opt/opentsdb
+    mkdir -p /opt/opentsdb
+    tar -C /opt/opentsdb -xzf ~/files/$OPENTSDB_TARBALL
+    chmod -R go+rwX /opt/opentsdb
 
-$basedir/bin/build_opentsdb.sh $OPENTSDB_HOME
+    $basedir/bin/build_opentsdb.sh $OPENTSDB_HOME
 
-# TODO: can't run this until hbase is started...
-##env COMPRESSION=NONE HBASE_HOME=$HBASE_HOME $OPENTSDB_HOME/src/create_table.sh
+    # TODO: can't run this until hbase is started...
+    ##env COMPRESSION=NONE HBASE_HOME=$HBASE_HOME $OPENTSDB_HOME/src/create_table.sh
 
-cat > $OPENTSDB_HOME/start_tsd.sh << EOF
-tsdtmp=\${TMPDIR-'/tmp'}/tsd    # For best performance, make sure
-mkdir -p "\$tsdtmp"             # your temporary directory uses tmpfs
-$OPENTSDB_HOME/build/tsdb tsd --port=4242 --staticroot=$OPENTSDB_HOME/build/staticroot --cachedir="\$tsdtmp"
+    cat > $OPENTSDB_HOME/start_tsd.sh << EOF
+    tsdtmp=\${TMPDIR-'/tmp'}/tsd    # For best performance, make sure
+    mkdir -p "\$tsdtmp"             # your temporary directory uses tmpfs
+    $OPENTSDB_HOME/build/tsdb tsd --port=4242 --staticroot=$OPENTSDB_HOME/build/staticroot --cachedir="\$tsdtmp"
 EOF
+fi
 
 
 echo "### Prepare GTStream directories"
