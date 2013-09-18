@@ -28,15 +28,15 @@ VM_HOSTNAME_PREFIX=gtstream
 # hostname for hadoop master
 HADOOP_MASTER_HOSTNAME=gtstream-hadoop-master
 # OpenStack VM flavor for hadoop master
-HADOOP_MASTER_FLAVOR=10  # ne.large
+HADOOP_MASTER_FLAVOR=9  # ne.medium
 
 # hostname for hbase master
 HBASE_MASTER_HOSTNAME=gtstream-hbase-master
 # OpenStack VM flavor for hbase master
-HBASE_MASTER_FLAVOR=4  # m1.large
+HBASE_MASTER_FLAVOR=9  # ne.medium
 
 # OpenStack VM flavor for all zookeeper quorum nodes
-ZOOKEEPER_QUORUM_FLAVOR=3  # m1.medium
+ZOOKEEPER_QUORUM_FLAVOR=9  # ne.medium
 # hostnames for ZK quorum servers
 # ZOOKEEPER_QUORUM_1_HOSTNAME is required, others are optional
 ZOOKEEPER_QUORUM_1_HOSTNAME=gtstream-zk1

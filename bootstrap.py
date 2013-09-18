@@ -15,7 +15,7 @@ def generate_ssh_keypair():
             raise RuntimeError("error generating ssh keys: rc=%d" % rc)
 
         priv_key = ['GTSTREAM_SSH_PRIV_KEY="\\']
-        pub_key = ['GTSTREAM_SSH_PUB_KEY="\\']
+        pub_key = ['GTSTREAM_SSH_PUB_KEY="']
         with open("%s/id_rsa" % outdir, 'r') as f:
             for line in f:
                 priv_key.append(line.strip() + '\\n\\')
@@ -23,9 +23,9 @@ def generate_ssh_keypair():
             pub_key.append(f.read().strip())
 
         priv_key.append('"')
-        pub_key.append('\\"')
+        pub_key.append('"')
 
-        return '\n'.join(priv_key), '\n'.join(pub_key)
+        return '\n'.join(priv_key), ''.join(pub_key)
 
     finally:
         shutil.rmtree(outdir)

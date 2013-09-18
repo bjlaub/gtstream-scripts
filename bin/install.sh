@@ -85,6 +85,14 @@ EOF
 sysctl -p
 
 
+## Install some stuff from apt
+echo "### Updating/Installing apt packages"
+apt-get update
+if [ ! -z "$GTSTREAM_APT_PACKAGES" ]; then
+    apt-get install -y $GTSTREAM_APT_PACKAGES
+fi
+
+
 ## Install Java
 echo "### Installing JDK"
 if [ ! -f ~/files/$JDK_TARBALL ]; then
@@ -309,6 +317,46 @@ EOF
 
 cat >> /etc/bash.bashrc << EOF
 export PATH=\$PATH:$FLUME_HOME/bin
+EOF
+
+
+# TODO: might be unnecessary
+## Install Apache Ant
+echo "### Installing Ant"
+if [ ! -f ~/files/$ANT_TARBALL ]; then
+    wget $ANT_URL
+    mv $ANT_TARBALL ~/files
+fi
+
+mkdir -p /opt/ant
+tar -C /opt/ant -xzf ~/files/$ANT_TARBALL
+chmod -R go+rwX /opt/ant
+
+cat >> /etc/bash.bashrc << EOF
+export PATH=\$PATH:$ANT_HOME/bin
+EOF
+
+
+## Install OpenTSDB
+echo "### Installing OpenTSDB"
+if [ ! -f ~/files/$OPENTSDB_TARBALL ]; then
+    wget $OPENTSDB_URL
+    mv $OPENTSDB_TARBALL ~/files
+fi
+
+mkdir -p /opt/opentsdb
+tar -C /opt/opentsdb -xzf ~/files/$OPENTSDB_TARBALL
+chmod -R go+rwX /opt/opentsdb
+
+$basedir/bin/build_opentsdb.sh $OPENTSDB_HOME
+
+# TODO: can't run this until hbase is started...
+##env COMPRESSION=NONE HBASE_HOME=$HBASE_HOME $OPENTSDB_HOME/src/create_table.sh
+
+cat > $OPENTSDB_HOME/start_tsd.sh << EOF
+tsdtmp=\${TMPDIR-'/tmp'}/tsd    # For best performance, make sure
+mkdir -p "\$tsdtmp"             # your temporary directory uses tmpfs
+$OPENTSDB_HOME/build/tsdb tsd --port=4242 --staticroot=$OPENTSDB_HOME/build/staticroot --cachedir="\$tsdtmp"
 EOF
 
 
