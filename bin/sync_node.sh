@@ -18,4 +18,4 @@ vm=$2
 set -x
 rsync -e "ssh -i $KEY" -av $filesdir/. $USER@`get_ip $vm`:~/$filesdir_remote
 rsync -e "ssh -i $KEY" -av $scriptsdir $USER@`get_ip $vm`:~
-#$basedir/bin/sshexec.sh $vm sudo $scriptsdir_remote/bin/install.sh
+$basedir/bin/sshexec.sh $vm sudo $scriptsdir_remote/bin/install.sh
