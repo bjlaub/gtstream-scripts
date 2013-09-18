@@ -63,46 +63,14 @@ Host *
 EOF
 chown $USER:$GROUP ~/.ssh/config
 
-cat > ~/.ssh/id_rsa << EOF
------BEGIN RSA PRIVATE KEY-----
-MIIEogIBAAKCAQEAoIs1LsEO/OBk4a0jZAd1Cwz41h/2AMdXa0Wwrmdo9KGP8lIm
-E1HMG1kt8CABXCNTD1Uxmxg7mifUBTKkdS4VoumRY2MfuIiCVE4xwuTS9rOm2ndu
-yQGhoyKIevJastRAYfJ3ijvUZt2S6WdaWisZZYS0URuCzSrBLIclop0FaPMpuxJ4
-GQA4vd0lz8yYcza0s/GKGkof9JZfgdtO7S3wzVSkq2F3NSaj/CkOVdLk6G2Wnq2m
-7WbBM4kCaQByIESJ4lLyNuSZ23S8BOBWuHGqy8FyQS+0BQLRsPvZQq0xc6ed/ufc
-CpgwGo0m63PvGwZ58dB2LbA6mKHBCk8jqVVqKQIDAQABAoIBADsINPwGHR663B1n
-bpX/b/gqQu1pPym2Itzc+USH3b3mEmoF7t43u5dqyUt8WUOp8Ya3ys++r1vVvU5T
-+sjjsyz+OWmULzvJZjLdtcp2HWR9VqMKO4BJy0eTESA0MUmEZlAdufroWQeh/b05
-Na3mHyaHD06rkQMj73gSEbKjjjOycNBmwZB0jWdLgWyCtigdzgGKoSMtfKkJn8hK
-FLcn/FF2zwv6eTX1DngZcc0LDSR/XKsZp8w26GGtu1UKbEtOa+Nqm97AevXjnMp8
-5aoKIHbXky0iy80gv+S4y+nLdHBxSZyHnDe1rC+yjCVbGfRwImnqVHGx0C3MFcjR
-bNyNRAkCgYEAzdYZ3Oo2RngP32gY9C1AZjPiFd9xBSgaowl222cZW/FiWEmPd//4
-bmmBDfoOBFQiidGwpy7h3MONPwYL1ayVANjFwYh3akrCw+o6PKDqrxcFENpMwR0R
-2E2mpt/gAgU8M+RnNARlhuaim/fsNTUPYnbP/5vWRWMGw8ATRLGipbMCgYEAx6ta
-3zkB2P2o+m1aFI16gGTmhqGnU19xYWMa0jpUMwZHaB8sxVlGjaYeeS69DnoG68zF
-uiRN0Juvu3QPxXXuIuKvrlGz5cAs2iU2MdB7H04Sbc1my47kG/DJAVJB05VeEi/n
-+HMhWJmYMVWR46yI5d6DS7cSmkHG46gx0yIrOrMCgYBOPiR2pVEcWGcwNRHHP6xL
-LU2zoswDecsmTmKv4/Dv0kHf7ZZrtxFoZxJ3jaXmX1UBroPICToyAOOgIVw+TOwW
-9k+10XoTHXgLoO2iPkj3ZXi3f0PN5I7z+hBvPoqYOgU4dIoGa+Vr8h+9yfAwCYtf
-kmpeb45zscDQiCLK6fs5oQKBgCKCdEdGdBJL7SuzQLFyrmyIg+ta/y+CvHbniRgy
-qqDTAf51/OfzASW0Q2oQcO6SmqWgk8ATTDu03M+aRKuNMWZoJZMMXfpkl5vweIht
-jwofFUJTEOQ3wyctG6CV1fi6xTKBgydGxsmoakyEjJ18EYEhTzID5zwwCC8Kv+nM
-6wnPAoGAcn7qg1zHXtzLwxMgdyFW5btgMt25H6wxV+8pkxUWLFkKbZXihj+CLkJK
-yRgk9yfXUzGYMxGZ7N9p9muIUbje8KY8WOWpudOQImBMReDNEVkvJ4p8Wp7NxMcQ
-DFTCS/m1ifjGWSAHpX+7DhGWp0FqI0bMQQHSOLYO1Onxm1MOkrk=
------END RSA PRIVATE KEY-----
-EOF
+echo -en $GTSTREAM_SSH_PRIV_KEY > ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
 chown $USER:$GROUP ~/.ssh/id_rsa
 
-cat > ~/.ssh/id_rsa.pub << EOF
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCgizUuwQ784GThrSNkB3ULDPjWH/YAx1drRbCuZ2j0oY/yUiYTUcwbWS3wIAFcI1MPVTGbGDuaJ9QFMqR1LhWi6ZFjYx+4iIJUTjHC5NL2s6bad27JAaGjIoh68lqy1EBh8neKO9Rm3ZLpZ1paKxllhLRRG4LNKsEshyWinQVo8ym7EngZADi93SXPzJhzNrSz8YoaSh/0ll+B207tLfDNVKSrYXc1JqP8KQ5V0uTobZaerabtZsEziQJpAHIgRIniUvI25JnbdLwE4Fa4carLwXJBL7QFAtGw+9lCrTFzp53+59wKmDAajSbrc+8bBnnx0HYtsDqYocEKTyOpVWop root@gtstream-new-pd3
-EOF
+echo -en $GTSTREAM_SSH_PUB_KEY > ~/.ssh/id_rsa.pub
 chown $USER:$GROUP ~/.ssh/id_rsa.pub
 
-cat >> ~/.ssh/authorized_keys << EOF
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCgizUuwQ784GThrSNkB3ULDPjWH/YAx1drRbCuZ2j0oY/yUiYTUcwbWS3wIAFcI1MPVTGbGDuaJ9QFMqR1LhWi6ZFjYx+4iIJUTjHC5NL2s6bad27JAaGjIoh68lqy1EBh8neKO9Rm3ZLpZ1paKxllhLRRG4LNKsEshyWinQVo8ym7EngZADi93SXPzJhzNrSz8YoaSh/0ll+B207tLfDNVKSrYXc1JqP8KQ5V0uTobZaerabtZsEziQJpAHIgRIniUvI25JnbdLwE4Fa4carLwXJBL7QFAtGw+9lCrTFzp53+59wKmDAajSbrc+8bBnnx0HYtsDqYocEKTyOpVWop root@gtstream-new-pd3
-EOF
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chown $USER:$GROUP ~/.ssh/authorized_keys
 
 
@@ -115,6 +83,18 @@ net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv6.conf.lo.disable_ipv6 = 1
 EOF
 sysctl -p
+
+
+## Install some stuff from apt
+if [ $GTSTREAM_INSTALL_SKIP_APT -eq 1 ]; then
+    echo "### Skipping update/install apt packages"
+else
+    echo "### Updating/Installing apt packages"
+    apt-get update
+    if [ ! -z "$GTSTREAM_APT_PACKAGES" ]; then
+        apt-get install -y $GTSTREAM_APT_PACKAGES
+    fi
+fi
 
 
 ## Install Java
@@ -342,6 +322,50 @@ EOF
 cat >> /etc/bash.bashrc << EOF
 export PATH=\$PATH:$FLUME_HOME/bin
 EOF
+
+
+# TODO: might be unnecessary
+## Install Apache Ant
+echo "### Installing Ant"
+if [ ! -f ~/files/$ANT_TARBALL ]; then
+    wget $ANT_URL
+    mv $ANT_TARBALL ~/files
+fi
+
+mkdir -p /opt/ant
+tar -C /opt/ant -xzf ~/files/$ANT_TARBALL
+chmod -R go+rwX /opt/ant
+
+cat >> /etc/bash.bashrc << EOF
+export PATH=\$PATH:$ANT_HOME/bin
+EOF
+
+
+## Install OpenTSDB
+if [ $GTSTREAM_INSTALL_SKIP_OPENTSDB -eq 1 ]; then
+    echo "### Skipping install of OpenTSDB"
+else
+    echo "### Installing OpenTSDB"
+    if [ ! -f ~/files/$OPENTSDB_TARBALL ]; then
+        wget $OPENTSDB_URL
+        mv $OPENTSDB_TARBALL ~/files
+    fi
+
+    mkdir -p /opt/opentsdb
+    tar -C /opt/opentsdb -xzf ~/files/$OPENTSDB_TARBALL
+    chmod -R go+rwX /opt/opentsdb
+
+    $basedir/bin/build_opentsdb.sh $OPENTSDB_HOME
+
+    # TODO: can't run this until hbase is started...
+    ##env COMPRESSION=NONE HBASE_HOME=$HBASE_HOME $OPENTSDB_HOME/src/create_table.sh
+
+    cat > $OPENTSDB_HOME/start_tsd.sh << EOF
+    tsdtmp=\${TMPDIR-'/tmp'}/tsd    # For best performance, make sure
+    mkdir -p "\$tsdtmp"             # your temporary directory uses tmpfs
+    $OPENTSDB_HOME/build/tsdb tsd --port=4242 --staticroot=$OPENTSDB_HOME/build/staticroot --cachedir="\$tsdtmp"
+EOF
+fi
 
 
 echo "### Prepare GTStream directories"

@@ -17,7 +17,7 @@ filesdir=$3
 
 # bootup the node and install software
 echo "booting up node and installing software..."
-$basedir/bin/bootup_node_and_sync.sh $flavor $host $filesdir
+$basedir/bin/bootup_node_and_sync.sh $flavor $host $filesdir notsdb
 echo "done"
 
 ip=`get_ip $host`

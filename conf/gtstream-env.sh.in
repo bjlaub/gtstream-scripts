@@ -62,19 +62,35 @@ FLUME_HBASE_TABLE=test
 FLUME_HBASE_COLUMNFAMILY=log
 
 
+ANT_VERSION=apache-ant-1.9.2
+ANT_TARBALL=${ANT_VERSION}-bin.tar.gz
+ANT_URL=http://www.gtlib.gatech.edu/pub/apache/ant/binaries/$ANT_TARBALL
+ANT_HOME=/opt/ant/$ANT_VERSION
+
+
+OPENTSDB_VERSION=opentsdb-2.0.0
+OPENTSDB_TARBALL=${OPENTSDB_VERSION}.tar.gz
+# TODO: change this once 2.0.0 is released...
+OPENTSDB_URL=https://github.com/OpenTSDB/opentsdb/releases/download/v2.0.0RC1/opentsdb-2.0.0.tar.gz
+OPENTSDB_HOME=/opt/opentsdb/$OPENTSDB_VERSION
+
+
 # this is the path to a "workload" file for the gtstream benchmark
 # should be a single logfile that is appended to on each machine
 # that's part of the test
+GTSTREAM_BASE=/mnt/gtstream
+GTSTREAM_LOGS=$GTSTREAM_BASE/logs
 GTSTREAM_LOGFILE=/mnt/gtstream/logs/logfile.log
 
+# list of ubuntu packages to install when running install.sh
+GTSTREAM_APT_PACKAGES="gcc g++ make autoconf cmake git subversion bison flex gnuplot-nox"
 
-# set this to "true" to reset passwords on an instance during install
-# do NOT do this on a public cloud! (e.g. AWS)
-GTSTREAM_ENABLE_PASSWORDS=false
-# set the password for the root user
-#GTSTREAM_ROOT_PASSWORD=
-# set the password for the ubuntu user
-#GTSTREAM_UBUNTU_PASSWORD=
-
-
-
+# set this to "true" to enable password authentication via ssh
+%(ssh_enable_passwords)s
+# set the root password
+%(ssh_root_password)s
+# set the password for ubuntu
+%(ssh_user_password)s
+# set public/private ssh keys
+%(ssh_private_key)s
+%(ssh_public_key)s
