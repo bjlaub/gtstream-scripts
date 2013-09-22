@@ -361,10 +361,68 @@ else
     ##env COMPRESSION=NONE HBASE_HOME=$HBASE_HOME $OPENTSDB_HOME/src/create_table.sh
 
     cat > $OPENTSDB_HOME/start_tsd.sh << EOF
-    tsdtmp=\${TMPDIR-'/tmp'}/tsd    # For best performance, make sure
-    mkdir -p "\$tsdtmp"             # your temporary directory uses tmpfs
-    $OPENTSDB_HOME/build/tsdb tsd --port=4242 --staticroot=$OPENTSDB_HOME/build/staticroot --cachedir="\$tsdtmp"
+#!/bin/bash
+
+basedir=$OPENTSDB_HOME
+tsdb=\$basedir/build/tsdb
+tsdtmp=\${TMPDIR-'/tmp'}/tsd
+
+zkquorum=$ZK_QUORUM
+
+mkdir -p \$tsdtmp
+mkdir -p \$basedir/logs
+mkdir -p \$basedir/pids
+host=\`hostname\`
+
+cmd="\$tsdb tsd --port=4242 --staticroot=\$basedir/build/staticroot --cachedir=\$tsdtmp --zkquorum=\$zkquorum \$@"
+log=\$basedir/logs/\${host}-tsd.out
+pid=\$basedir/pids/\${host}-tsd.pid
+
+echo "starting \$cmd, logging to \$log"
+nohup \$cmd > \$log 2>&1 < /dev/null &
+echo \$! > \$pid
 EOF
+
+    chmod +x $OPENTSDB_HOME/start_tsd.sh
+
+    cat > $OPENTSDB_HOME/stop_tsd.sh << EOF
+#!/bin/bash
+
+basedir=$OPENTSDB_HOME
+host=\`hostname\`
+pid=\$basedir/pids/\${host}-tsd.pid
+
+STOP_TIMEOUT=5
+
+if [ -f \$pid ]; then
+    TARGET_PID=\`cat \$pid\`
+    if kill -0 \$TARGET_PID > /dev/null 2>&1; then
+        echo "stopping tsd..."
+        kill \$TARGET_PID
+        sleep \$STOP_TIMEOUT
+        if kill -0 \$TARGET_PID > /dev/null 2>&1; then
+            echo "tsd did not stop gracefully after \$STOP_TIMEOUT seconds; killing with kill -9"
+            kill -9 \$TARGET_PID
+        fi
+    else
+        echo no tsd to stop
+    fi
+else
+    echo no tsd to stop
+fi
+EOF
+
+    chmod +x $OPENTSDB_HOME/stop_tsd.sh
+
+
+#    cat > $OPENTSDB_HOME/start_tsd.sh << EOF
+##!/bin/bash
+#tsdtmp=\${TMPDIR-'/tmp'}/tsd    # For best performance, make sure
+#mkdir -p "\$tsdtmp"             # your temporary directory uses tmpfs
+#$OPENTSDB_HOME/build/tsdb tsd --port=4242 --staticroot=$OPENTSDB_HOME/build/staticroot --cachedir="\$tsdtmp"
+#EOF
+#    chmod +x $OPENTSDB_HOME/start_tsd.sh
+
 fi
 
 

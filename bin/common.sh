@@ -4,7 +4,7 @@ basedir=`dirname $0`/..
 . $basedir/conf/cloud-properties.sh
 
 function get_ip() {
-    vm=$1
+    vm="${1}\$"
     nova list --name $vm | grep -v BUILD | grep novanetwork | awk '{print $8}' | cut -d'=' -f2
 }
 
