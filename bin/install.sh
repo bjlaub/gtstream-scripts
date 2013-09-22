@@ -363,6 +363,9 @@ else
     cat > $OPENTSDB_HOME/start_tsd.sh << EOF
 #!/bin/bash
 
+export JAVA_HOME=$JAVA_HOME
+export JAVA=\$JAVA_HOME/bin/java
+
 basedir=$OPENTSDB_HOME
 tsdb=\$basedir/build/tsdb
 tsdtmp=\${TMPDIR-'/tmp'}/tsd
@@ -381,6 +384,7 @@ pid=\$basedir/pids/\${host}-tsd.pid
 echo "starting \$cmd, logging to \$log"
 nohup \$cmd > \$log 2>&1 < /dev/null &
 echo \$! > \$pid
+sleep 1
 EOF
 
     chmod +x $OPENTSDB_HOME/start_tsd.sh
