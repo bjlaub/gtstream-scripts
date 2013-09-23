@@ -317,11 +317,19 @@ cat > /opt/flume/$FLUME_VERSION/conf/flume-env.sh << EOF
 JAVA_HOME=${JAVA_HOME}
 # add hbase-site config to flume's classpath
 FLUME_CLASSPATH=${HBASE_HOME}/conf/hbase-site.xml
+# without hadoop/hbase on the PATH, commands launched via ssh/fabric won't
+# pick up the right classpath when starting flume agents
+PATH=\$PATH:${HADOOP_HOME}/bin:${HBASE_HOME}/bin
 EOF
 
 cat >> /etc/bash.bashrc << EOF
 export PATH=\$PATH:$FLUME_HOME/bin
 EOF
+
+mkdir -p $FLUME_BASE
+mkdir -p $FLUME_BASE/logs
+mkdir -p $FLUME_BASE/pids
+chmod -R go+rwX $FLUME_BASE
 
 
 # TODO: might be unnecessary
