@@ -3,7 +3,7 @@
 basedir=`dirname $0`/..
 . $basedir/conf/gtstream-env.sh
 
-TIMEOUT=10
+TIMEOUT=5
 
 cd $FLUME_BASE
 piddir=$FLUME_BASE/pids
@@ -14,7 +14,7 @@ if [ -f $pidfile ]; then
     if kill -0 $tokill >/dev/null 2>&1; then
         echo "stopping flume agent"
         kill $tokill
-        sleep 10
+        sleep $TIMEOUT
         if kill -0 $tokill > /dev/null 2>&1; then
             echo "flume agent did not stop gracefully after $TIMEOUT seconds: killing with kill -9"
             kill -9 $tokill

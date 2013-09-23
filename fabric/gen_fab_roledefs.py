@@ -18,6 +18,9 @@ all_hosts = client.servers.list(search_opts={'name': server_prefix})
 def find_hosts(hosts, prefix):
     found = []
     for h in hosts:
+        # TODO: a special check... remove this
+        if h.name == 'gtstream-control': continue
+
         if h.name.startswith(prefix):
             found.append(h.name)
     return found
@@ -34,6 +37,8 @@ hbase_regions = find_hosts(all_hosts, server_prefix + '-hbase-region')
 
 zookeepers = find_hosts(all_hosts, server_prefix + '-zk')
 
+workloads = find_hosts(all_hosts, server_prefix + '-workload')
+
 roledefs = {
     'all': all_servers,
     
@@ -43,9 +48,11 @@ roledefs = {
 
     'hbase-all': hbase_all,
     'hbase-master': hbase_master,
-    'hbase_regions': hbase_regions,
+    'hbase-regions': hbase_regions,
 
     'zookeepers': zookeepers,
+
+    'workloads': workloads,
 }
 
 for r in sorted(roledefs):
